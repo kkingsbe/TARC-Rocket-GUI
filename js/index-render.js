@@ -2,7 +2,7 @@ var {ipcRenderer} = require("electron")
 var networks, selectedNetwork, signalStrength
 
 getNetworks()
-drawGraph()
+graphWifiStrength()
 
 $(".connect-btn").click(() => {
   $(".modal").css("display", "flex")

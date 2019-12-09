@@ -18,7 +18,7 @@ function createWindow()
     win.maximize()
     win.show()
   })
-  win.webContents.openDevTools()
+  //win.webContents.openDevTools()
 }
 
 function scanNetworks(event) {

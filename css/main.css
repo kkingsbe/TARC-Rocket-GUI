@@ -12,10 +12,10 @@ html, body {
   padding: 0px;
   display: flex;
   flex-direction: column;
-  background: #243457;
+  background: #19346e;
 }
 .topbar {
-  background: #1c2842;
+  background: #162647;
   margin: none;
   height: 50px;
   width: 100%;
@@ -52,21 +52,21 @@ html, body {
   width: 30px;
   height: 20px;
   border: 5px solid transparent;
-  border-top: 5px solid #1de71d;
+  border-top: 5px solid #ff0000;
 }
 .bar2 {
   border-radius: 50%;
   width: 15px;
   height: 20px;
   border: 5px solid transparent;
-  border-top: 5px solid #1de71d;
+  border-top: 5px solid #ff0000;
   margin-top: -19px;
 }
 .bar3 {
   border-radius: 50%;
   width: 6px;
   height: 6px;
-  background: #1de71d;
+  background: #ff0000;
   margin-top: -19px;
 }
 .control-buttons {
@@ -142,10 +142,12 @@ html, body {
 .title {
   font-size: 70px;
   color: white;
+  border-bottom: 3px solid white;
+  margin-bottom: 10px;
 }
 .title p {
-  margin: 0px;
   margin-top: 10px;
+  margin-bottom: 5px;
 }
 .btn-container {
   width: 100%;
@@ -174,7 +176,7 @@ html, body {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.7);
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -231,4 +233,30 @@ html, body {
 .network-select-row:hover {
   background: #2a3f69;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+}
+.dashboard {
+  height: 90%;
+  width: 90%;
+  margin: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+.graph {
+  height: 100%;
+  width: 100%;
+  background: #152C5C;
+  border-radius: 5px;
+}
+.graph-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 3px solid rgb(12, 25, 53);
+}
+.graph-title p {
+  font-size: 30px;
+  color: white;
+  margin: 7px;
 }

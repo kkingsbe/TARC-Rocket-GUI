@@ -1,5 +1,8 @@
 var {ipcRenderer} = require("electron")
-var networks, selectedNetwork
+var networks, selectedNetwork, signalStrength
+
+getNetworks()
+drawGraph()
 
 $(".connect-btn").click(() => {
   $(".modal").css("display", "flex")
@@ -42,6 +45,7 @@ function connectToNetwork()
 
 function updateStrengthDisplay(strength)
 {
+  signalStrength = strength
   if(strength >= -60) {
     console.log("Strong")
     $(".bar1").css("border-top", "5px solid #1de71d")

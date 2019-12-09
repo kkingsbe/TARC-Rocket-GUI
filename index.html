@@ -12,6 +12,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/main.css">
 
+    <!-- Step 1 - Include the fusioncharts core library -->
+    <script type="text/javascript" src="https://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
+    <script type="text/javascript" src="https://static.fusioncharts.com/code/latest/fusioncharts.charts.js"></script>
+    <!-- Step 2 - Include the fusion theme -->
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+
     <script>window.$ = window.jQuery = require('jquery');</script>
   </head>
   <body>
@@ -57,11 +63,56 @@
       </div>
       <div class="content">
         <div class="title">
-          <p>Ground Station</p>
+          <p>Live Telemetry</p>
         </div>
-        <div class="btn-container">
-          <div class="connect-btn">
-            Connect
+        <div class="dashboard">
+          <div class="graph" id="wifiSignalContainer">
+            <div class="graph-title">
+              <p>Wifi Signal</p>
+            </div>
+            <div class="graph-container" id="signalStrengthGraph">
+
+            </div>
+          </div>
+          <div class="graph" id="thrustContainer">
+            <div class="graph-title">
+              <p>Thrust</p>
+            </div>
+            <div class="graph-container">
+
+            </div>
+          </div>
+          <div class="graph" id="accelerationContainer">
+            <div class="graph-title">
+              <p>Acceleration</p>
+            </div>
+            <div class="graph-container">
+
+            </div>
+          </div>
+          <div class="graph" id="altitudeContainer">
+            <div class="graph-title">
+              <p>Altitude (integrated)</p>
+            </div>
+            <div class="graph-container">
+
+            </div>
+          </div>
+          <div class="graph" id="velocityContainer">
+            <div class="graph-title">
+              <p>Velocity (integrated)</p>
+            </div>
+            <div class="graph-container">
+
+            </div>
+          </div>
+          <div class="graph" id="airbrakeAngleContainer">
+            <div class="graph-title">
+              <p>Airbrake Angle</p>
+            </div>
+            <div class="graph-container">
+
+            </div>
           </div>
         </div>
       </div>
@@ -79,6 +130,7 @@
         </div>
       </div>
     </div>
+    <script src="js/graphing.js" async defer></script>
     <script src="js/index-render.js" async defer></script>
     <script src="js/control-btns.js" async defer></script>
     <script src="js/dropdown.js" async defer></script>

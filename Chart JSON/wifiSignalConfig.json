@@ -1,0 +1,9 @@
+{
+  "chart": {
+    "caption": "Wifi Signal Strength",
+    "xAxisName": "Time (seconds)",
+    "yAxisName": "Signal Strength (mDB)",
+    "numberSuffix": "mDB",
+    "theme" : "fusion"
+  },
+}

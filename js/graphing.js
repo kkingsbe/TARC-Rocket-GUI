@@ -1,3 +1,5 @@
+var {ipcRenderer} = require("electron")
+
 function graphWifiStrength()
 {
   let startTime = (new Date()) / 1000
@@ -24,6 +26,7 @@ function graphWifiStrength()
   console.log(data)
 
   let options = {
+    colors: ["#A58C17", "#C97430"],
     chart: {
       type: "line",
       animations: {
@@ -90,4 +93,152 @@ function graphWifiStrength()
       data: data
     }])
   }, 1000)
+}
+
+async function graphAltitude(content)
+{
+  let data = []
+
+  for(row of content)
+  {
+    let y = Number(row.split(" ")[0])
+    let x = Number(row.split(" ")[1])
+    data.push({
+      x: x,
+      y: y
+    })
+  }
+
+  let options = {
+    colors: ["#A58C17", "#C97430"],
+    chart: {
+      type: "area",
+      zoom: {
+        enabled: false
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'straight'
+    },
+    series: [{
+      name: "Altitude",
+      data: data
+    }],
+    xaxis: {
+      interval: 1
+    }
+  }
+
+  var chart = new ApexCharts(
+    document.querySelector("#altitudeGraph"),
+    options
+  )
+
+  chart.render()
+}
+
+async function graphVelocity(content)
+{
+  let data = []
+
+  for(row of content)
+  {
+    let y = Number(row.split(" ")[0])
+    let x = Number(row.split(" ")[1])
+    data.push({
+      x: x,
+      y: y
+    })
+  }
+
+  let options = {
+    colors: ["#A58C17", "#C97430"],
+    chart: {
+      type: "area",
+      zoom: {
+        enabled: false
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'straight'
+    },
+    series: [{
+      name: "Velocity",
+      data: data
+    }],
+    xaxis: {
+      interval: 1
+    }
+  }
+
+  var chart = new ApexCharts(
+    document.querySelector("#velocityGraph"),
+    options
+  )
+
+  chart.render()
+}
+
+async function graphAcceleration(content)
+{
+  let data = []
+
+  for(row of content)
+  {
+    let y = Number(row.split(" ")[0])
+    let x = Number(row.split(" ")[1])
+    data.push({
+      x: x,
+      y: y
+    })
+  }
+
+  let options = {
+    colors: ["#A58C17", "#C97430"],
+    chart: {
+      type: "area",
+      zoom: {
+        enabled: false
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'straight'
+    },
+    series: [{
+      name: "Acceleration",
+      data: data
+    }],
+    xaxis: {
+      interval: 1,
+      title: {
+        text: "Acceleration (m/s^2)",
+        style: {
+          colors: "#fff"
+        }
+      },
+      labels: {
+        hideOverlappingLabels: true,
+        trim: true,
+        style: {
+          colors: "#fff"
+        }
+      }
+    }
+  }
+
+  var chart = new ApexCharts(
+    document.querySelector("#accelerationGraph"),
+    options
+  )
+
+  chart.render()
 }

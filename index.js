@@ -1,4 +1,5 @@
 const electron = require("electron")
+const fs = require("fs")
 const {app, BrowserWindow, ipcMain} = require("electron")
 var WiFiControl = require("wifi-control")
 
@@ -18,7 +19,7 @@ function createWindow()
     win.maximize()
     win.show()
   })
-  win.webContents.openDevTools()
+  //win.webContents.openDevTools()
 }
 
 function scanNetworks(event) {
@@ -70,6 +71,22 @@ function setupWifi(event) {
   })
 }
 
+function loadData(event, url) {
+  fs.readFile(url, (err, data) => {
+    if(err) {
+      console.log(err)
+      return
+    }
+    arr = data.toString().split("\n")
+    event.sender.send("asynchronous-message", 
+    {
+      title: "fileData",
+      url: url,
+      data: arr
+    })
+  })
+}
+
 ipcMain.on("asynchronous-message", (event, arg) => {
   switch(arg.command) {
     case "maximize":
@@ -108,6 +125,8 @@ ipcMain.on("asynchronous-message", (event, arg) => {
         }
       })
       break
+    case "readFile":
+      loadData(event, arg.url)
   }
 })
 

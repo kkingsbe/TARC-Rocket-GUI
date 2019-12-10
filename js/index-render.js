@@ -1,8 +1,8 @@
 var {ipcRenderer} = require("electron")
 var networks, selectedNetwork, signalStrength
 
-getNetworks()
-graphWifiStrength()
+//getNetworks()
+//graphWifiStrength()
 
 $(".connect-btn").click(() => {
   $(".modal").css("display", "flex")
@@ -81,5 +81,32 @@ ipcRenderer.on("asynchronous-message", (event, arg) => {
         $(".bar2").css("border-top", "5px solid #ff0000")
         $(".bar3").css("background", "#ff0000")
       }
+      break
+    case "fileData":
+      if(arg.url == "Sample Data/altitude.csv")
+      {
+        graphAltitude(arg.data)
+      }
+      else if(arg.url == "Sample Data/velocity.csv")
+      {
+        graphVelocity(arg.data)
+      }
+      else if(arg.url == "Sample Data/acceleration.csv")
+      {
+        graphAcceleration(arg.data)
+      }
   }
 });
+
+ipcRenderer.send("asynchronous-message", {
+  command: "readFile",
+  url: "Sample Data/altitude.csv"
+})
+ipcRenderer.send("asynchronous-message", {
+  command: "readFile",
+  url: "Sample Data/velocity.csv"
+})
+ipcRenderer.send("asynchronous-message", {
+  command: "readFile",
+  url: "Sample Data/acceleration.csv"
+})

@@ -8,16 +8,16 @@ function graphWifiStrength()
   function getNewData()
   {
     /*
-    for(var i = 0; i < data.length - 10; i++)
+    for(var i = 0; i < data.length - xAxisRange; i++)
     {
-      data[i].x = ((new Date()) / 1000) - xAxisRange - tickInterval
-      data[i].y = 0
+      data.splice(i, 1)
     }
     */
     data.push({
-      x: new Date() / 1000,
-      y: Math.floor(Math.random() * 100)
+      x: Math.floor((new Date() / 1000) - startTime),
+      y: signalStrength
     })
+    console.log(signalStrength)
   }
 
   getNewData()
@@ -47,21 +47,31 @@ function graphWifiStrength()
       curve: "smooth"
     },
     series: [{
-      name: "test",
+      name: "Signal Strength",
       data: data
     }],
     markers: {
       size: 0
     },
     xaxis: {
-      type: 'datetime',
-      range: xAxisRange //Possibly modify this
+      range: xAxisRange,
+      labels: {
+        show: false
+      }
+    },
+    theme: {
+      mode: "dark",
+      palette: "palette1"
     },
     yaxis: {
-      max: 100 //Change this for sure
+      max: -30,
+      min: -90,
+      style: {
+        color: "#ffffff"
+      }
     },
     legend: {
-      show: false
+      show: true
     },
   } 
 
@@ -71,6 +81,8 @@ function graphWifiStrength()
   );
 
   chart.render()
+
+  console.log(chart)
 
   window.setInterval(function() {
     getNewData()

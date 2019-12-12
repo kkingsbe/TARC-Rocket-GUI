@@ -26,8 +26,8 @@ function graphWifiStrength()
   console.log(data)
 
   let options = {
-    colors: ["#A58C17", "#C97430"],
     chart: {
+      height: "500px",
       type: "line",
       animations: {
         enabled: true,
@@ -35,6 +35,11 @@ function graphWifiStrength()
         dynamicAnimation: {
           speed: 1000
         },
+      },
+      grid: {
+        row: {
+          colors: ['#f3f3f3', 'transparent']
+        }
       },
       toolbar: {
         show: false
@@ -58,19 +63,24 @@ function graphWifiStrength()
     },
     xaxis: {
       range: xAxisRange,
-      labels: {
-        show: false
+      tickAmount: 10,
+      title: {
+        text: "Elapsed Time (seconds)",
+        style: {
+          fontSize: '17px',
+          fontFamily: "Roboto, sans-serif"
+        }
       }
-    },
-    theme: {
-      mode: "dark",
-      palette: "palette1"
     },
     yaxis: {
       max: -30,
       min: -90,
-      style: {
-        color: "#ffffff"
+      title: {
+        text: "Strength (dBm)",
+        style: {
+          fontSize: '17px',
+          fontFamily: "Roboto, sans-serif"
+        }
       }
     },
     legend: {
@@ -110,7 +120,7 @@ async function graphAltitude(content)
   }
 
   let options = {
-    colors: ["#A58C17", "#C97430"],
+    height: "100%",
     chart: {
       type: "area",
       zoom: {
@@ -155,7 +165,7 @@ async function graphVelocity(content)
   }
 
   let options = {
-    colors: ["#A58C17", "#C97430"],
+    height: "100%",
     chart: {
       type: "area",
       zoom: {
@@ -200,7 +210,7 @@ async function graphAcceleration(content)
   }
 
   let options = {
-    colors: ["#A58C17", "#C97430"],
+    height: "100%",
     chart: {
       type: "area",
       zoom: {
@@ -220,23 +230,68 @@ async function graphAcceleration(content)
     xaxis: {
       interval: 1,
       title: {
-        text: "Acceleration (m/s^2)",
-        style: {
-          colors: "#fff"
-        }
+        text: "Acceleration (m/s^2)"
       },
       labels: {
         hideOverlappingLabels: true,
-        trim: true,
-        style: {
-          colors: "#fff"
-        }
+        trim: true
       }
     }
   }
 
   var chart = new ApexCharts(
     document.querySelector("#accelerationGraph"),
+    options
+  )
+
+  chart.render()
+}
+async function graphDrag(content)
+{
+  let data = []
+
+  for(row of content)
+  {
+    let y = Number(row.split(" ")[0])
+    let x = Number(row.split(" ")[1])
+    data.push({
+      x: x,
+      y: y
+    })
+  }
+
+  let options = {
+    height: "100%",
+    chart: {
+      type: "area",
+      zoom: {
+        enabled: false
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'straight'
+    },
+    series: [{
+      name: "Drag",
+      data: data
+    }],
+    xaxis: {
+      interval: 1,
+      title: {
+        text: "Force (Newtons)"
+      },
+      labels: {
+        hideOverlappingLabels: true,
+        trim: true
+      }
+    }
+  }
+
+  var chart = new ApexCharts(
+    document.querySelector("#dragGraph"),
     options
   )
 

@@ -1,18 +1,18 @@
 var {ipcRenderer} = require("electron")
 var networks, selectedNetwork, signalStrength
 
-//getNetworks()
-//graphWifiStrength()
+getNetworks()
+graphWifiStrength()
 
 $(".connect-btn").click(() => {
-  $(".modal").css("display", "flex")
+  $(".modal-container").css("display", "flex")
   getNetworks()
 })
 
 $(".network-select").click((e) => {
   selectedNetwork = $(e.target)[0].innerHTML
   $("#connectivityLabel").html(selectedNetwork)
-  $(".modal").css("display", "none")
+  $(".modal-container").css("display", "none")
   connectToNetwork()
 })
 
@@ -95,6 +95,10 @@ ipcRenderer.on("asynchronous-message", (event, arg) => {
       {
         graphAcceleration(arg.data)
       }
+      else if(arg.url == "Sample Data/drag.csv")
+      {
+        graphDrag(arg.data)
+      }
   }
 });
 
@@ -109,4 +113,8 @@ ipcRenderer.send("asynchronous-message", {
 ipcRenderer.send("asynchronous-message", {
   command: "readFile",
   url: "Sample Data/acceleration.csv"
+})
+ipcRenderer.send("asynchronous-message", {
+  command: "readFile",
+  url: "Sample Data/drag.csv"
 })
